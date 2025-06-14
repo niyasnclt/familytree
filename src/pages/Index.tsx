@@ -139,7 +139,7 @@ interface WifesSectionProps {
   onToggle: () => void;
 }
 
-const WivesSection: React.FC<WifesSectionProps & { openWifeIndexes: any, setOpenWifeIndexes: any, selectedPerson?: string, personRefs?: any }> = ({ wives, searchTerm, isExpanded, onToggle, openWifeIndexes, setOpenWifeIndexes, selectedPerson, personRefs }) => {
+const WivesSection: React.FC<WifesSectionProps & { openWifeIndexes: any, setOpenWifeIndexes: any, selectedPerson?: string, personRefs?: any, pathArr?: string[] }> = ({ wives, searchTerm, isExpanded, onToggle, openWifeIndexes, setOpenWifeIndexes, selectedPerson, personRefs, pathArr = [] }) => {
   const [openWifeIndexesLocal, setOpenWifeIndexesLocal] = useState<{[key:number]: boolean}>({});
 
   const toggleWifeSection = (index: number, subIndex?: number) => {
@@ -159,48 +159,52 @@ const WivesSection: React.FC<WifesSectionProps & { openWifeIndexes: any, setOpen
       </Button>
       {isExpanded && (
         <div className="space-y-6 animate-fade-in">
-          {wives.map((wife, wifeIndex) => (
-            <div key={wifeIndex} className="space-y-3">
-              <PersonCard 
-                name={wife.name} 
-                relationship="Wife" 
-                searchTerm={searchTerm}
-                selectedPerson={selectedPerson}
-                personRefs={personRefs}
-              />
-              <Collapsible open={!!openWifeIndexes[`${wifeIndex}`]} onOpenChange={() => toggleWifeSection(wifeIndex)}>
-                <CollapsibleTrigger asChild>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="mb-2 text-blue-700"
-                  >
-                    {openWifeIndexes[`${wifeIndex}`] ? <ChevronUp className="inline w-4 h-4 mr-1" /> : <ChevronDown className="inline w-4 h-4 mr-1" />}
-                    {openWifeIndexes[`${wifeIndex}`] ? 'Hide Children' : 'Show Children'}
-                  </Button>
-                </CollapsibleTrigger>
-                <CollapsibleContent>
-                  {wife.children && wife.children.length > 0 && (
-                    <div className="ml-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                      {wife.children.map((child: any, childIndex: number) => (
-                        <FamilyNode
-                          key={typeof child === 'string' ? child : child.name}
-                          node={child}
-                          relationship="Child"
-                          searchTerm={searchTerm}
-                          selectedPerson={selectedPerson}
-                          personRefs={personRefs}
-                          openWifeIndexes={openWifeIndexes}
-                          setOpenWifeIndexes={setOpenWifeIndexes}
-                          pathArr={[wife.name]}
-                        />
-                      ))}
-                    </div>
-                  )}
-                </CollapsibleContent>
-              </Collapsible>
-            </div>
-          ))}
+          {wives.map((wife, wifeIndex) => {
+            const wifeKeyArr = [...pathArr, wife.name];
+            const wifeKey = wifeKeyArr.join('-');
+            return (
+              <div key={wifeIndex} className="space-y-3">
+                <PersonCard 
+                  name={wife.name} 
+                  relationship="Wife" 
+                  searchTerm={searchTerm}
+                  selectedPerson={selectedPerson}
+                  personRefs={personRefs}
+                />
+                <Collapsible open={!!openWifeIndexes[wifeKey]} onOpenChange={() => setOpenWifeIndexes((prev: any) => ({ ...prev, [wifeKey]: !prev[wifeKey] }))}>
+                  <CollapsibleTrigger asChild>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="mb-2 text-blue-700"
+                    >
+                      {openWifeIndexes[wifeKey] ? <ChevronUp className="inline w-4 h-4 mr-1" /> : <ChevronDown className="inline w-4 h-4 mr-1" />}
+                      {openWifeIndexes[wifeKey] ? 'Hide Children' : 'Show Children'}
+                    </Button>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    {wife.children && wife.children.length > 0 && (
+                      <div className="ml-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                        {wife.children.map((child: any, childIndex: number) => (
+                          <FamilyNode
+                            key={typeof child === 'string' ? child : child.name}
+                            node={child}
+                            relationship="Child"
+                            searchTerm={searchTerm}
+                            selectedPerson={selectedPerson}
+                            personRefs={personRefs}
+                            openWifeIndexes={openWifeIndexes}
+                            setOpenWifeIndexes={setOpenWifeIndexes}
+                            pathArr={wifeKeyArr}
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </CollapsibleContent>
+                </Collapsible>
+              </div>
+            );
+          })}
         </div>
       )}
     </div>
