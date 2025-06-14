@@ -1,0 +1,69 @@
+{
+  "main_family": {
+    "name": "Ahmed Kutty (Narimukkukkil Ayi Mutti)",
+    "wives": [
+      {
+        "name": "Kootil Ayishabhi",
+        "children": ["Muhammad (Valiya Kutti Mon)", "Abdullah Koya", "Ummer", "Kunjeevi"]
+      },
+      {
+        "name": "Fathima (Puthiyarele)",
+        "children": [
+          "Abubackar",
+          "Fathima",
+          "Iyyathutti",
+          {
+            "name": "Hasan",
+            "wife": "Ayishabi Mol",
+            "children": ["Saffiya", "Rasheed", "Asharaf", {
+              "name": "Niyas",
+              "wife": "Hiba",
+              "children": ["Nuha Mariyam", "Hazim", "Nazeeh"]
+            }]
+          },
+          "Kunjan",
+          "Ummukulsum",
+          "Hamsa",
+          "Ramlabi"
+        ]
+      },
+      {
+        "name": "Nafeesa (Naduvattam)",
+        "children": ["Pennu", "Kutti Mol", "Koya", "Safiya", "Azeez"]
+      },
+      {
+        "name": "Kauja",
+        "children": ["Kunjan", "Jameela", "Suba", "Silu"]
+      }
+    ]
+  },
+  "other_family_members": [
+    {
+      "name": "Kiriyaadath Kunjae Mutti Haji",
+      "wife": "Thithikutty Hajjumma",
+      "children": ["Kutti Mon", "Cheriyaaka", "Abu", "Malu", "Kunjan", "Ayisha Mol"],
+      "relationship": "Sibling of Ahmed Kutty"
+    },
+    {
+      "name": "Thottol Mammais Kutti",
+      "wives": [
+        {
+          "name": "Aamina",
+          "children": ["Koya Kutti", "Nabeesa", "Majeed", "Bichimol", "Suharaabi"]
+        },
+        {
+          "name": "Kachallama",
+          "children": ["Sulayya", "Abu", "Nabeesu", "Basheer", "Musthu", "Ashraf"]
+        }
+      ],
+      "relationship": "Sibling of Ahmed Kutty"
+    }
+  ],
+  "second_generation": [
+    {
+      "husband": "Hasan",
+      "wife": "Ayishabi Mol",
+      "children": ["Saffiya", "Rasheed", "Asharaf", "Niyas"]
+    }
+  ]
+}

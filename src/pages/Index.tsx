@@ -4,76 +4,28 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import rawFamilyData from '../data/familyData.json';
 
-const familyData = {
+// Define types for the family data structure
+interface FamilyNodeType {
+  name: string;
+  wife?: string;
+  wives?: Array<{ name: string; children: any[] }>;
+  children?: any[];
+  relationship?: string;
+}
+
+interface FamilyData {
   main_family: {
-    name: "Ahmed Kutty (Narimukkukkil Ayi Mutti)",
-    wives: [
-      {
-        name: "Kootil Ayishabhi",
-        children: ["Muhammad (Valiya Kutti Mon)", "Abdullah Koya", "Ummer", "Kunjeevi"]
-      },
-      {
-        name: "Fathima (Puthiyarele)",
-        children: [
-          "Abubackar",
-          "Fathima",
-          "Iyyathutti",
-          {
-            name: "Hasan",
-            wife: "Ayishabi Mol",
-            children: ["Saffiya", "Rasheed", "Asharaf", {
-              name: "Niyas",
-              wife: "Hiba",
-              children: ["Nuha Mariyam", "Hazim", "Nazeeh"]
-            }]
-          },
-          "Kunjan",
-          "Ummukulsum",
-          "Hamsa",
-          "Ramlabi"
-        ]
-      },
-      {
-        name: "Nafeesa (Naduvattam)",
-        children: ["Pennu", "Kutti Mol", "Koya", "Safiya", "Azeez"]
-      },
-      {
-        name: "Kauja",
-        children: ["Kunjan", "Jameela", "Suba", "Silu"]
-      }
-    ]
-  },
-  other_family_members: [
-    {
-      name: "Kiriyaadath Kunjae Mutti Haji",
-      wife: "Thithikutty Hajjumma",
-      children: ["Kutti Mon", "Cheriyaaka", "Abu", "Malu", "Kunjan", "Ayisha Mol"],
-      relationship: "Sibling of Ahmed Kutty"
-    },
-    {
-      name: "Thottol Mammais Kutti",
-      wives: [
-        {
-          name: "Aamina",
-          children: ["Koya Kutti", "Nabeesa", "Majeed", "Bichimol", "Suharaabi"]
-        },
-        {
-          name: "Kachallama",
-          children: ["Sulayya", "Abu", "Nabeesu", "Basheer", "Musthu", "Ashraf"]
-        }
-      ],
-      relationship: "Sibling of Ahmed Kutty"
-    }
-  ],
-  second_generation: [
-    {
-      husband: "Hasan",
-      wife: "Ayishabi Mol",
-      children: ["Saffiya", "Rasheed", "Asharaf", "Niyas"]
-    }
-  ]
-};
+    name: string;
+    wives: Array<{ name: string; children: any[] }>;
+  };
+  other_family_members: FamilyNodeType[];
+  second_generation?: any[];
+}
+
+// Import and cast the JSON data
+const familyData = rawFamilyData as FamilyData;
 
 interface PersonCardProps {
   name: string;
